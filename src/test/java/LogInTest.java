@@ -65,7 +65,7 @@ public class LogInTest {
         var wrongPassword = DataGenerator.getPassword();
 
         $(By.cssSelector("[data-test-id='login'] input.input__control")).setValue(registeredUser.getLogin());
-        $(By.cssSelector("[data-test-id='password'] input.input__control")).setValue(registeredUser.getPassword());
+        $(By.cssSelector("[data-test-id='password'] input.input__control")).setValue(wrongPassword);
         $$(By.cssSelector("button")).first().click();
         $(By.cssSelector("[data-test-id='error-notification'] .notification__content")).shouldBe(visible, Duration.ofSeconds(15)).shouldHave(text("Ошибка! " + "Неверно указан логин или пароль"));
 
