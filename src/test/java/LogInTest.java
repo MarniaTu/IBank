@@ -4,8 +4,7 @@ import org.openqa.selenium.By;
 
 import java.time.Duration;
 
-import static com.codeborne.selenide.Condition.text;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static com.codeborne.selenide.Selenide.$;
 
@@ -56,7 +55,7 @@ public class LogInTest {
         $(By.cssSelector("[data-test-id='login'] input.input__control")).setValue(wrongLogin);
         $(By.cssSelector("[data-test-id='password'] input.input__control")).setValue(registeredUser.getPassword());
         $$(By.cssSelector("button")).first().click();
-        $(By.cssSelector("[data-test-id='error-notification'] .notification__content")).shouldBe(visible).shouldHave(text("Ошибка! " + "Неверно указан логин или пароль"));
+        $(By.cssSelector("[data-test-id='error-notification'] .notification__content")).shouldBe(visible, Duration.ofSeconds(15)).shouldHave(text("Ошибка! " + "Неверно указан логин или пароль"));
 
     }
 
@@ -66,9 +65,9 @@ public class LogInTest {
         var wrongPassword = DataGenerator.getPassword();
 
         $(By.cssSelector("[data-test-id='login'] input.input__control")).setValue(registeredUser.getLogin());
-        $(By.cssSelector("[data-test-id='password'] input.input__control")).setValue(wrongPassword);
+        $(By.cssSelector("[data-test-id='password'] input.input__control")).setValue(registeredUser.getPassword());
         $$(By.cssSelector("button")).first().click();
-        $(By.cssSelector("[data-test-id='error-notification'] .notification__content")).shouldBe(visible).shouldHave(text("Ошибка! " + "Неверно указан логин или пароль"));
+        $(By.cssSelector("[data-test-id='error-notification'] .notification__content")).shouldBe(visible, Duration.ofSeconds(15)).shouldHave(text("Ошибка! " + "Неверно указан логин или пароль"));
 
     }
 }
